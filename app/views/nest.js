@@ -1,37 +1,28 @@
+import InnerApp from 'appkit/inner_app';
+
 var NestView = Ember.View.extend({
   didInsertElement: function() {
-    var Resolver = require('resolver');
-
-    var Router = Ember.Router.extend({
-      location: 'none'
+    window.NestedApp = InnerApp.create({
+      rootElement: this.$('.nested-root')[0]
     });
-
-    Router.map(function() {
-      this.route('about');
-    });
-
-    var MyApp = Ember.Application.extend({
-      rootElement: this.$('.nested-root')[0],
-      LOG_ACTIVE_GENERATION: true,
-      LOG_VIEW_LOOKUPS: true,
-      modulePrefix: 'appkit', // TODO: loaded via config
-      Resolver: Resolver,
-      Router: Router
-    });
-
-    var NestedApp = MyApp.create();
-    window.NestedApp = NestedApp;
 
     var ApplicationView = Ember.View.extend({
       templateName: "nested_application"
     });
 
     var IndexView = Ember.View.extend({
-      templateName: "nested_index"
+      templateName: "nested_index",
+      click: function() {
+        console.log("clicked the NestedApp's IndexView");
+      }
     });
 
     var container = NestedApp.__container__;
+
+    container.unregister('view:application');
     container.register('view:application', ApplicationView);
+
+    container.unregister('view:index');
     container.register('view:index', IndexView);
 
     this._app = NestedApp;
