@@ -6,7 +6,8 @@
     "setTimeout",
     "Ember",
     "Em",
-    "$"
+    "$",
+    "require"
   ],
   "node" : false,
   "browser" : false,

@@ -7,10 +7,13 @@ var NestView = Ember.View.extend({
       LOG_VIEW_LOOKUPS: true,
       modulePrefix: 'appkit', // TODO: loaded via config
       Resolver: Resolver,
-      Router: Ember.Router.extend()
+      Router: Ember.Router.extend({
+        location: 'none'
+      })
     });
 
-    window.NestedApp = MyApp.create();
+    var NestedApp = MyApp.create();
+    window.NestedApp = NestedApp;
 
     NestedApp.Router.map(function() {
       this.route('about');
@@ -27,9 +30,11 @@ var NestView = Ember.View.extend({
     var container = NestedApp.__container__;
     container.register('view:application', ApplicationView);
     container.register('view:index', IndexView);
+
+    this._app = NestedApp;
   },
   willDestroyElement: function() {
-    this.get('app').destroy();
+    this._app.destroy();
   }
 });
 
