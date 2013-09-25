@@ -1,23 +1,26 @@
 var NestView = Ember.View.extend({
   didInsertElement: function() {
     var Resolver = require('resolver');
+
+    var Router = Ember.Router.extend({
+      location: 'none'
+    });
+
+    Router.map(function() {
+      this.route('about');
+    });
+
     var MyApp = Ember.Application.extend({
       rootElement: this.$('.nested-root')[0],
       LOG_ACTIVE_GENERATION: true,
       LOG_VIEW_LOOKUPS: true,
       modulePrefix: 'appkit', // TODO: loaded via config
       Resolver: Resolver,
-      Router: Ember.Router.extend({
-        location: 'none'
-      })
+      Router: Router
     });
 
     var NestedApp = MyApp.create();
     window.NestedApp = NestedApp;
-
-    NestedApp.Router.map(function() {
-      this.route('about');
-    });
 
     var ApplicationView = Ember.View.extend({
       templateName: "nested_application"
