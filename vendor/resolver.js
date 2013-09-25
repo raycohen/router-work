@@ -7,7 +7,7 @@ define("resolver",
    * important features:
    *
    *  1) The resolver makes the container aware of es6 modules via the AMD
-   *     output. The loader's _seen is consulted so that classes can be 
+   *     output. The loader's _seen is consulted so that classes can be
    *     resolved directly via the module loader, without needing a manual
    *     `import`.
    *  2) is able provide injections to classes that implement `extend`
@@ -18,7 +18,7 @@ define("resolver",
     return {
       create: function (injections) {
         if (typeof klass.extend === 'function') {
-          return klass.extend(injections);  
+          return klass.extend(injections);
         } else {
           return klass;
         }
@@ -96,14 +96,10 @@ define("resolver",
     }
   }
 
-  function resolveTemplate(parsedName) {
-    return Ember.TEMPLATES[parsedName.name] || Ember.TEMPLATES[Ember.String.underscore(parsedName.name)];
-  }
-
   // Ember.DefaultResolver docs:
   //   https://github.com/emberjs/ember.js/blob/master/packages/ember-application/lib/system/resolver.js
   var Resolver = Ember.DefaultResolver.extend({
-    resolveTemplate: resolveTemplate,
+    resolveTemplate: resolveOther,
     resolveOther: resolveOther,
     parseName: parseName,
     normalize: function(fullName) {

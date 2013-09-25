@@ -11,7 +11,7 @@ Router.map(function() {
 var MyApp = Ember.Application.extend({
   LOG_ACTIVE_GENERATION: true,
   LOG_VIEW_LOOKUPS: true,
-  modulePrefix: 'appkit', // TODO: loaded via config
+  modulePrefix: 'inner',
   Resolver: Resolver,
   Router: Router
 });

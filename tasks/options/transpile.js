@@ -13,16 +13,28 @@ module.exports = {
       dest: 'tmp/transpiled/tests/'
     }]
   },
-  "app": {
+  "outerApp": {
     type: 'amd',
     moduleName: function(path) {
-      return grunt.config.process('<%= pkg.namespace %>/') + path;
+      return grunt.config.process('outer') + path;
     },
     files: [{
       expand: true,
-      cwd: 'tmp/javascript/app/',
+      cwd: 'tmp/javascript/app/outer',
       src: '**/*.js',
-      dest: 'tmp/transpiled/app/'
+      dest: 'tmp/transpiled/app/outer'
+    }]
+  },
+  "innerApp": {
+    type: 'amd',
+    moduleName: function(path) {
+      return grunt.config.process('inner') + path;
+    },
+    files: [{
+      expand: true,
+      cwd: 'tmp/javascript/app/inner',
+      src: '**/*.js',
+      dest: 'tmp/transpiled/app/inner'
     }]
   }
 };

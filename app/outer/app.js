@@ -1,10 +1,10 @@
 import Resolver from 'resolver';
-import Router from 'appkit/router';
+import Router from 'outer/router';
 
 var App = Ember.Application.extend({
   LOG_ACTIVE_GENERATION: true,
   LOG_VIEW_LOOKUPS: true,
-  modulePrefix: 'appkit', // TODO: loaded via config
+  modulePrefix: 'outer',
   Resolver: Resolver,
   Router: Router
 });

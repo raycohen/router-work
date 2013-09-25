@@ -1,7 +1,7 @@
 module.exports = {
   compile: {
     files: {
-      'tmp/public/assets/app.css': 'app/styles/**/*.{scss,sass}'
+      'tmp/public/assets/app.css': 'app/outer/styles/**/*.{scss,sass}'
     }
   }
 };
